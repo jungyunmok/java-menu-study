@@ -1,6 +1,7 @@
 package menu.controller;
 
 import menu.model.Coach;
+import menu.model.Days;
 import menu.model.Menu;
 import menu.model.PickRandom;
 import menu.view.InputView;
@@ -19,7 +20,10 @@ public class MainController {
     // 점심 메뉴 추천 시작
     public void startMenu() {
         outputView.startRecommend();
-        
+
+
+
+        outputView.endRecommend();
     }
 
     // 코치 이름 입력
@@ -63,14 +67,18 @@ public class MainController {
     }
 
     // 추천 메뉴 반환하기
-    public void pickMenu(List<String> menuList, List<String> dislikeMenu) {
+    public List<String> pickMenu(List<String> menuList, List<String> dislikeMenu) {
         List<String> menuHistory = null;
         do {
             String pickedMenu = pickRandom.selectMenu(menuList, menuHistory, dislikeMenu);
             menuHistory = menu.saveMenu(pickedMenu);
-        } while (menuHistory.size() == 5);
+        } while (menuHistory.size() == Days.DAYS.length);
+        return menuHistory;
     }
 
-    // 요일 선택해서 카테고리, 추천메뉴 출력하기
-
+    // 요일 선택해서 카테고리, 추천메뉴 출력하기 - 카테고리 히스토리 가져올것(List<String> categoryHistory)
+    public void recommendResult() {
+        outputView.printResult();
+        outputView.printDays(Days.DAYS);
+    }
 }
