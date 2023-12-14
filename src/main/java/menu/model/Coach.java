@@ -34,8 +34,8 @@ public class Coach {
     }
 
     // 코치별 먹지 못하는 음식 저장
-    public Map<String, List<String>> dislikeFood(String name, List<String> dislike) {
-        coachInfo.put(name, dislike);
+    public Map<String, List<String>> dislikeFood(String name, List<String> dislikeMenu) {
+        coachInfo.put(name, dislikeMenu);
         return coachInfo;
     }
 }
