@@ -4,18 +4,21 @@ import menu.model.Coach;
 import menu.model.Menu;
 import menu.model.PickRandom;
 import menu.view.InputView;
+import menu.view.OutputView;
 
 import java.util.List;
 import java.util.Map;
 
 public class MainController {
     InputView inputView;
+    OutputView outputView;
     Coach coach;
     Menu menu;
     PickRandom pickRandom;
     
     // 점심 메뉴 추천 시작
     public void startMenu() {
+        outputView.startRecommend();
         
     }
 
@@ -67,7 +70,6 @@ public class MainController {
             menuHistory = menu.saveMenu(pickedMenu);
         } while (menuHistory.size() == 5);
     }
-
 
     // 요일 선택해서 카테고리, 추천메뉴 출력하기
 
