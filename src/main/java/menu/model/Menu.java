@@ -12,10 +12,6 @@ public class Menu {
     }};
     private List<String> categoryHistory = new ArrayList<>();
 
-    public List<String> getCategoryHistory() {
-        return categoryHistory;
-    }
-
     private List<String> menuHistory = new ArrayList<>();
 
     // 뽑은 숫자에 따라 카테고리 결정
@@ -30,18 +26,23 @@ public class Menu {
         } else if (categoryNumber == 4) {
             categoryName = "asian";
         }
-        checkHistory(categoryName);
-        return allMenu.get(categoryName);
+        return checkHistory(categoryName);
     }
 
     // 2회를 초과하는 추천 카테고리인지 검증
-    private void checkHistory(String categoryName) {
+    private List<String> checkHistory(String categoryName) {
         if (categoryHistory.contains(categoryName)) {
             if (Collections.frequency(categoryHistory, categoryName) >= 2) {
                 throw new IllegalArgumentException();
             }
         }
         categoryHistory.add(categoryName);
+        return categoryHistory;
+    }
+
+    // 해당 카테고리에 해당하는 메뉴 반환하기
+    public List<String> returnMenuList(String categoryName) {
+        return allMenu.get(categoryName);
     }
 
     // 입력값(싫어하는 음식) 리스트에 담기
