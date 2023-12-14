@@ -24,6 +24,8 @@ public class Coach {
     private List<String> validateName(String names) {
         List<String > coachNames = new ArrayList<>();
         try {
+            String temp = String.valueOf(names.charAt(names.length()-1));
+            if(temp.equals(",")) throw new IllegalArgumentException();
             String[] tempNames = names.split(",");
             coachNames = Arrays.asList(tempNames);
         } catch (ArrayIndexOutOfBoundsException e) {

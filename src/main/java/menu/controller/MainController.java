@@ -7,6 +7,7 @@ import menu.model.PickRandom;
 import menu.view.InputView;
 import menu.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,14 @@ public class MainController {
     Coach coach;
     Menu menu;
     PickRandom pickRandom;
+
+    public MainController() {
+        inputView = new InputView();
+        outputView = new OutputView();
+        coach = new Coach();
+        menu = new Menu();
+        pickRandom = new PickRandom();
+    }
 
     // 점심 메뉴 추천 시작
     public void startMenu() {
@@ -69,11 +78,9 @@ public class MainController {
 
     // 추천 메뉴 반환하기
     private List<String> pickMenu(List<String> menuList, List<String> dislikeMenu) {
-        List<String> menuHistory = null;
-        do {
-            String pickedMenu = pickRandom.selectMenu(menuList, menuHistory, dislikeMenu);
-            menuHistory = menu.saveMenu(pickedMenu);
-        } while (menuHistory.size() < Days.DAYS.length);
+        List<String> menuHistory = new ArrayList<>();
+        String pickedMenu = pickRandom.selectMenu(menuList, menuHistory, dislikeMenu);
+        menuHistory = menu.saveMenu(pickedMenu);
         return menuHistory;
     }
 
@@ -91,12 +98,13 @@ public class MainController {
 
     // 결정된 추천 메뉴 출력하기
     public void fixedMenu(List<String> categoryHistory, Map<String, List<String>> coachInfo) {
-        for(String name : coachInfo.keySet()) {
+        for (String name : coachInfo.keySet()) {
             List<String> menuHistory = null;
-            for(String category : categoryHistory) {
+            for (String category : categoryHistory) {
                 menuHistory = pickMenu(menu.returnMenuList(category), coachInfo.get(name));
             }
             outputView.printMenu(name, menuHistory);
+            menuHistory.clear();
         }
     }
 }

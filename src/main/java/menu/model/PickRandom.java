@@ -17,7 +17,7 @@ public class PickRandom {
         String menu;
         do {
             menu = Randoms.shuffle(menuList).get(0);
-        } while(dislikeMenu.contains(menu) && Collections.frequency(menuHistory,menu) >= 2);
+        } while(dislikeMenu.contains(menu) || Collections.frequency(menuHistory,menu) >= 2);
         return menu;
     }
 }
