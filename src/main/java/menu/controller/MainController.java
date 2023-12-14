@@ -8,6 +8,7 @@ import menu.view.InputView;
 import menu.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,24 +65,16 @@ public class MainController {
         return coachInfo;
     }
 
-    // 카테고리 선택하고 그에 맞는 메뉴 반환하기
+    // 카테고리 선택하고 반환하기
     private List<String> pickCategory() {
         int category = pickRandom.selectCategory();
-        List<String> menuList = null;
+        List<String> categoryHistory = null;
         try {
-            menuList = menu.pickCategory(category);
+            categoryHistory = menu.pickCategory(category);
         } catch (IllegalArgumentException e) {
             pickCategory();
         }
-        return menuList;
-    }
-
-    // 추천 메뉴 반환하기
-    private List<String> pickMenu(List<String> menuList, List<String> dislikeMenu) {
-        List<String> menuHistory = new ArrayList<>();
-        String pickedMenu = pickRandom.selectMenu(menuList, menuHistory, dislikeMenu);
-        menuHistory = menu.saveMenu(pickedMenu);
-        return menuHistory;
+        return categoryHistory;
     }
 
     // 결정된 추천 카테고리 출력하기
@@ -98,13 +91,15 @@ public class MainController {
 
     // 결정된 추천 메뉴 출력하기
     public void fixedMenu(List<String> categoryHistory, Map<String, List<String>> coachInfo) {
-        for (String name : coachInfo.keySet()) {
-            List<String> menuHistory = null;
-            for (String category : categoryHistory) {
-                menuHistory = pickMenu(menu.returnMenuList(category), coachInfo.get(name));
+        Map<String, List<String>> menuHistory = new LinkedHashMap<>();
+        for (String category : categoryHistory) {
+            for (String name : coachInfo.keySet()) {
+                String pickedMenu = pickRandom.selectMenu(name, menu.returnMenuList(category), menuHistory, coachInfo.get(name));
+                menuHistory = menu.saveMenu(name, pickedMenu);
             }
-            outputView.printMenu(name, menuHistory);
-            menuHistory.clear();
+        }
+        for (String key : menuHistory.keySet()) {
+            outputView.printMenu(key, menuHistory.get(key));
         }
     }
 }

@@ -12,7 +12,7 @@ public class Menu {
     }};
     private List<String> categoryHistory = new ArrayList<>();
 
-    private List<String> menuHistory = new ArrayList<>();
+    private Map<String, List<String>> menuHistory = new LinkedHashMap<>();
 
     // 뽑은 숫자에 따라 카테고리 결정
     public List<String> pickCategory(int categoryNumber) {
@@ -101,8 +101,13 @@ public class Menu {
     }
 
     // 추천 메뉴를 담기
-    public List<String> saveMenu(String menu) {
-        menuHistory.add(menu);
+    public Map<String, List<String>> saveMenu(String name, String pickedMenu) {
+        List<String> menuList = new ArrayList<>();
+        if(menuHistory.containsKey(name)) {
+            menuList = menuHistory.get(name);
+        }
+        menuList.add(pickedMenu);
+        menuHistory.put(name, menuList);
         return menuHistory;
     }
 }

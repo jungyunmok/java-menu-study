@@ -3,7 +3,8 @@ package menu.model;
 import java.util.*;
 
 public class Coach {
-    private Map<String, List<String>> coachInfo = new HashMap<>();
+    private Map<String, List<String>> coachInfo = new LinkedHashMap<>();
+
     // 인원 수 이름 검사 후 저장
     public List<String> validateCoach(String names) {
         List<String > coachNames = validateName(names);
