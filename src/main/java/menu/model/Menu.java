@@ -41,8 +41,8 @@ public class Menu {
     }
 
     // 해당 카테고리에 해당하는 메뉴 반환하기
-    public List<String> returnMenuList(String categoryName) {
-        return allMenu.get(categoryName);
+    public List<String> returnMenuList(String category) {
+        return allMenu.get(category);
     }
 
     // 입력값(싫어하는 음식) 리스트에 담기

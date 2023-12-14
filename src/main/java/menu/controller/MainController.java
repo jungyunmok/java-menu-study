@@ -20,8 +20,10 @@ public class MainController {
     // 점심 메뉴 추천 시작
     public void startMenu() {
         outputView.startRecommend();
-
-
+        List<String> coachNames = setName();
+        Map<String, List<String>> coachInfo = setDislike(coachNames);
+        List<String> categoryHistory = fixedCategory();
+        fixedMenu(categoryHistory, coachInfo);
         outputView.endRecommend();
     }
 
@@ -76,7 +78,7 @@ public class MainController {
     }
 
     // 결정된 추천 카테고리 출력하기
-    public void fixedCategory() {
+    public List<String> fixedCategory() {
         outputView.printResult();
         outputView.printDays(Days.DAYS);
         List<String> categoryHistory = null;
@@ -84,8 +86,17 @@ public class MainController {
             categoryHistory = pickCategory();
         } while (categoryHistory.size() < Days.DAYS.length);
         outputView.printCategory(categoryHistory);
+        return categoryHistory;
     }
 
     // 결정된 추천 메뉴 출력하기
-
+    public void fixedMenu(List<String> categoryHistory, Map<String, List<String>> coachInfo) {
+        for(String name : coachInfo.keySet()) {
+            List<String> menuHistory = null;
+            for(String category : categoryHistory) {
+                menuHistory = pickMenu(menu.returnMenuList(category), coachInfo.get(name));
+            }
+            outputView.printMenu(name, menuHistory);
+        }
+    }
 }
