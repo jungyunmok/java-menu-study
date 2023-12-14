@@ -11,7 +11,8 @@ public class Menu {
     private Map<Integer, Integer> history = new HashMap<>();
 
     // 뽑은 숫자에 따라 카테고리 결정
-    public List<String> pickCategory(int number) {
+    public List<String> pickCategory(int category) {
+        int number = checkHistory(category);
         if (number == 1) {
             return japan;
         } else if (number == 2) {
@@ -25,6 +26,16 @@ public class Menu {
     }
 
     // 2회를 초과하는 추천 카테고리인지 검증
+    public int checkHistory(int category) {
+        if(history.containsKey(category)) {
+            history.put(category, history.get(category)+1);
+            if(history.get(category) > 2) {
+                throw new IllegalArgumentException();
+            }
+        }
+        history.put(category, 1);
+        return category;
+    }
 
     // 존재하는 메뉴인지 검증
 
