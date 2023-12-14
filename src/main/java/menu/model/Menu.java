@@ -9,6 +9,7 @@ public class Menu {
     private List<String> asian = new ArrayList<>(Arrays.asList("팟타이", "카오 팟", "나시고렝", "파인애플 볶음밥", "쌀국수", "똠얌꿍", "반미", "월남쌈", "분짜"));
     private List<String> western = new ArrayList<>(Arrays.asList("라자냐", "그라탱", "뇨끼", "끼슈", "프렌치 토스트", "바게트", "스파게티", "피자", "파니니"));
     private Map<Integer, Integer> categoryHistory = new HashMap<>();
+    private List<String> menuHistory = new ArrayList<>();
 
     // 뽑은 숫자에 따라 카테고리 결정
     public List<String> pickCategory(int category) {
@@ -32,6 +33,7 @@ public class Menu {
                 throw new IllegalArgumentException();
             }
             categoryHistory.put(category, categoryHistory.get(category)+1);
+            return category;
         }
         categoryHistory.put(category, 1);
         return category;
@@ -53,7 +55,7 @@ public class Menu {
         return dislikeMenu;
     }
     
-    // 존재하는 메뉴인지 검증
+    // 안먹는 메뉴가 존재하는 메뉴인지 검증
     private void validateMenu(List<String> dislikeMenu) {
         if(dislikeMenu.size() > 2) {
             System.out.println("[EROOR] 못 먹는 메뉴는 최대 2개까지 입력가능합니다.");
@@ -71,5 +73,9 @@ public class Menu {
         }
     }
 
-    // 중복되는 메뉴인지 검증
+    // 추천 메뉴를 담기
+    public List<String> saveMenu(String menu) {
+        menuHistory.add(menu);
+        return menuHistory;
+    }
 }
