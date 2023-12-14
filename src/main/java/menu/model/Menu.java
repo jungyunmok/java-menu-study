@@ -28,16 +28,44 @@ public class Menu {
     // 2회를 초과하는 추천 카테고리인지 검증
     public int checkHistory(int category) {
         if(history.containsKey(category)) {
-            history.put(category, history.get(category)+1);
-            if(history.get(category) > 2) {
+            if(history.get(category) >= 2) {
                 throw new IllegalArgumentException();
             }
+            history.put(category, history.get(category)+1);
         }
         history.put(category, 1);
         return category;
     }
 
+    // 입력값(싫어하는 음식) 리스트에 담기
+    public List<String> dislikekMenu(String dislike) {
+        List<String> dislikeMenu = new ArrayList<>();
+        if(dislike.contains(",") && dislike.contains(" ")) {
+            try {
+                String[] tempArr = dislike.split(",");
+                dislikeMenu = Arrays.asList(tempArr);
+                validateMenu(dislikeMenu);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("[EROOR] 못 먹는 메뉴를 공백없이 쉼표로 구분하여 입력해주세요.");
+                throw new IllegalArgumentException();
+            }
+        }
+        return dislikeMenu;
+    }
+    
     // 존재하는 메뉴인지 검증
+    private void validateMenu(List<String> dislikeMenu) {
+        int count = 0;
+        for(String menu : dislikeMenu) {
+            if (japan.contains(menu) || korea.contains(menu) || china.contains(menu) || asian.contains(menu) || western.contains(menu)) {
+                count++;
+            }
+        }
+        if(count != dislikeMenu.size()) {
+            System.out.println("[EROOR] 못 먹는 메뉴를 공백없이 쉼표로 구분하여 입력해주세요.");
+            throw new IllegalArgumentException();
+        }
+    }
 
     // 중복되는 메뉴인지 검증
 }
