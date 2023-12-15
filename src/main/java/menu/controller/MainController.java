@@ -1,9 +1,13 @@
 package menu.controller;
 
+import menu.constant.Days;
 import menu.model.Coach;
+import menu.model.Random;
+import menu.model.Recommend;
 import menu.view.InputView;
 import menu.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +15,8 @@ public class MainController {
     InputView inputView;
     OutputView outputView;
     Coach coach;
+    Random random;
+    Recommend recommend;
 
     // 시작
     public void start() {
@@ -35,7 +41,7 @@ public class MainController {
     }
 
     // 코치별 못 먹는 음식 입력
-    private void coachTaste(Map<String, List<String>> coachInfo) {
+    private Map<String, List<String>> coachTaste(Map<String, List<String>> coachInfo) {
         List<String> dislikeMenu = null;
         try {
             for(String key : coachInfo.keySet()) {
@@ -46,8 +52,18 @@ public class MainController {
         } catch (IllegalArgumentException e) {
             coachTaste(coachInfo);
         }
+        return coachInfo;
     }
 
+    // 추천할 카테고리 정하기
+    private List<String> fixedCategory() {
+        List<String> categoryHistory = null;
+        do {
+            int category = random.pickCategory();
+            categoryHistory = recommend.saveCategory(category);
+        }while(categoryHistory.size() == Days.DAYS.length);
+        return categoryHistory;
+    }
 
 
 }

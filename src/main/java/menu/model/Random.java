@@ -7,11 +7,8 @@ import java.util.List;
 
 public class Random {
     // 카테고리 추천
-    public int pickCategory(List<String> categoryHistory) {
-        int category = 0;
-        do {
-            category = Randoms.pickNumberInRange(1, 5);
-        } while(Collections.frequency(categoryHistory, category) >= 2);
+    public int pickCategory() {
+        int category = category = Randoms.pickNumberInRange(1, 5);
         return category;
     }
 
