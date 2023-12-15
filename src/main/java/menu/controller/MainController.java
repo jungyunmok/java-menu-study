@@ -76,4 +76,12 @@ public class MainController {
         return menuHistory;
     }
 
+    // 결과 출력하기
+    private void result(List<String> categoryHistory,Map<String, List<String>> menuHistory) {
+        outputView.printDays();
+        outputView.printCategory(categoryHistory);
+        for(String key : menuHistory.keySet()) {
+            outputView.printMenu(key, menuHistory.get(key));
+        }
+    }
 }
