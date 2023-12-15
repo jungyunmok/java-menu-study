@@ -1,29 +1,30 @@
 package menu.controller;
 
 import menu.constant.Days;
-import menu.constant.Menu;
 import menu.model.Coach;
 import menu.model.Random;
 import menu.model.Recommend;
 import menu.view.InputView;
 import menu.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MainController {
-    InputView inputView;
-    OutputView outputView;
-    Coach coach;
-    Random random;
-    Recommend recommend;
+    InputView inputView = new InputView();
+    OutputView outputView = new OutputView();
+    Coach coach = new Coach();
+    Random random = new Random();
+    Recommend recommend = new Recommend();
 
     // 시작
     public void start() {
         outputView.printStart();
-
+        Map<String, List<String>> coachInfo = coachName();
+        coachInfo = coachTaste(coachInfo);
+        List<String> categoryHistory = fixedCategory();
+        Map<String, List<String>> menuHistory = fixedMenu(coachInfo, categoryHistory);
+        result(categoryHistory, menuHistory);
         outputView.printEnd();
     }
 
