@@ -16,4 +16,11 @@ public class Random {
     }
 
     // 메뉴 추천
+    public String pickMenu(List<String> menuList, List<String> menuHistory, List<String> dislikeMenu) {
+        String menu = "";
+        do {
+            menu = Randoms.shuffle(menuList).get(0);
+        } while (menu.equals("") || dislikeMenu.contains(menu) || menuHistory.contains(menu));
+        return menu;
+    }
 }
