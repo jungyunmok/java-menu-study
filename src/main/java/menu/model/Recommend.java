@@ -7,11 +7,18 @@ import java.util.*;
 public class Recommend {
     private List<String> categoryHistory = new ArrayList<>();
 
+    private Map<String, List<String>> menuHistory = new LinkedHashMap<>();
+
+    public void setMenuHistory(Map<String, List<String>> coachInfo) {
+        for(String key : coachInfo.keySet()) {
+            List<String> tempList = new ArrayList<>();
+            menuHistory.put(key, tempList);
+        }
+    }
+
     public Map<String, List<String>> getMenuHistory() {
         return menuHistory;
     }
-
-    private Map<String, List<String>> menuHistory = new LinkedHashMap<>();
 
     // 한 주에 2번 이하 중복되는 카테고리 추천 저장하기
     public List<String> saveCategory(int category) {

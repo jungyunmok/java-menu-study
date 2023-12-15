@@ -7,6 +7,7 @@ import menu.model.Recommend;
 import menu.view.InputView;
 import menu.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class MainController {
         Map<String, List<String>> coachInfo = null;
         try {
             coachInfo = coach.splitName(nameList);
+            recommend.setMenuHistory(coachInfo);
         } catch (IllegalArgumentException e) {
             coachName();
         }
@@ -61,7 +63,7 @@ public class MainController {
         do {
             int category = random.pickCategory();
             categoryHistory = recommend.saveCategory(category);
-        } while (categoryHistory.size() == Days.DAYS.length);
+        } while (categoryHistory.size() < Days.DAYS.length);
         return categoryHistory;
     }
 
@@ -78,10 +80,10 @@ public class MainController {
     }
 
     // 결과 출력하기
-    private void result(List<String> categoryHistory,Map<String, List<String>> menuHistory) {
+    private void result(List<String> categoryHistory, Map<String, List<String>> menuHistory) {
         outputView.printDays();
         outputView.printCategory(categoryHistory);
-        for(String key : menuHistory.keySet()) {
+        for (String key : menuHistory.keySet()) {
             outputView.printMenu(key, menuHistory.get(key));
         }
     }

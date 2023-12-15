@@ -11,7 +11,7 @@ public class Coach {
     // 이름 쉼표로 나눠서 담기
     public Map<String, List<String>> splitName(String nameList) {
         Map<String, List<String>> coachInfo = new LinkedHashMap<>();
-        List<String> dislikeMenu = null;
+        List<String> dislikeMenu = new ArrayList<>();
         String lastWord = String.valueOf(nameList.charAt(nameList.length() - 1));
         if (!nameList.contains(",") || nameList.contains(" ") || lastWord.equals(",")) {
             System.out.println("[EROOR] 코치는 최소 2명, 최대 5명까지 공백없이 쉼표로 구분하여 입력해주세요.");
