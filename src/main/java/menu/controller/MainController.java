@@ -7,7 +7,6 @@ import menu.model.Recommend;
 import menu.view.InputView;
 import menu.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

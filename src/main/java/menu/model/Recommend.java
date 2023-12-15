@@ -10,7 +10,7 @@ public class Recommend {
     private Map<String, List<String>> menuHistory = new LinkedHashMap<>();
 
     public void setMenuHistory(Map<String, List<String>> coachInfo) {
-        for(String key : coachInfo.keySet()) {
+        for (String key : coachInfo.keySet()) {
             List<String> tempList = new ArrayList<>();
             menuHistory.put(key, tempList);
         }

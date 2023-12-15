@@ -67,11 +67,16 @@ public class Coach {
 
     // 메뉴 유효성 검사
     private void checkMenu(String eachMenu) {
+        int count = 0;
         for (Menu menu : Menu.values()) {
-            if(!menu.getMENULIST().contains(eachMenu)) {
-                System.out.println("[EROOR] 올바른 메뉴를 입력해주세요.");
-                throw new IllegalArgumentException();
+            count++;
+            if(menu.getMENULIST().contains(eachMenu)) {
+                return;
             }
+        }
+        if (count == Menu.values().length) {
+            System.out.println("[EROOR] 올바른 메뉴를 입력해주세요.");
+            throw new IllegalArgumentException();
         }
     }
 }
