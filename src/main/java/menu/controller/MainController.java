@@ -34,6 +34,19 @@ public class MainController {
         return coachInfo;
     }
 
+    // 코치별 못 먹는 음식 입력
+    private void coachTaste(Map<String, List<String>> coachInfo) {
+        List<String> dislikeMenu = null;
+        try {
+            for(String key : coachInfo.keySet()) {
+                String dislike = inputView.readMenu(key);
+                dislikeMenu = coach.selectDislike(dislike);
+                coachInfo.put(key, dislikeMenu);
+            }
+        } catch (IllegalArgumentException e) {
+            coachTaste(coachInfo);
+        }
+    }
 
 
 
