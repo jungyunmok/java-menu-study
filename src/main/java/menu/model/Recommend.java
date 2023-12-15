@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Recommend {
     private List<String> categoryHistory = new ArrayList<>();
+
     // 한 주에 2번 이하 중복되는 카테고리 추천 저장하기
     public List<String> saveCategory(int category) {
         for(Menu menu : Menu.values()) {
@@ -19,5 +20,10 @@ public class Recommend {
     }
 
     //  중복되지 않는 메뉴 추천하기
-
+    public List<String> saveMenu(List<String> menuHistory, String menu) {
+        if(!menuHistory.contains(menu)) {
+            menuHistory.add(menu);
+        }
+        return menuHistory;
+    }
 }
