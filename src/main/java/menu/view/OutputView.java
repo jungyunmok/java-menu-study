@@ -29,6 +29,13 @@ public class OutputView {
     }
 
     // 메뉴 추천 결과 - 코치별 추천 메뉴 출력
+    public void printMenu(String name, List<String> menuHistory) {
+        System.out.print("\n[ "+name+" ");
+        for(String menu : menuHistory) {
+            System.out.print("| "+menu);
+        }
+        System.out.print(" ]");
+    }
 
     // 서비스 종료 문구
     public void printEnd() {
