@@ -11,7 +11,7 @@ public class InputView {
     }
 
     // 못 먹는 메뉴 입력
-    public String readName(String name) {
+    public String readMenu(String name) {
         System.out.println("\n" + name + "(이)가 못 먹는 메뉴를 입력해 주세요.");
         String input = Console.readLine();
         return input;
