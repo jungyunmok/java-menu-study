@@ -2,6 +2,8 @@ package menu.view;
 
 import menu.constant.Days;
 
+import java.util.List;
+
 public class OutputView {
     // 서비스 시작 문구
     public void printStart() {
@@ -18,6 +20,13 @@ public class OutputView {
     }
 
     // 메뉴 추천 결과 - 카테고리 출력
+    public void printCategory(List<String> categoryHistory) {
+        System.out.print("\n[ 카테고리 ");
+        for(String category : categoryHistory) {
+            System.out.print("| "+category);
+        }
+        System.out.print(" ]");
+    }
 
     // 메뉴 추천 결과 - 코치별 추천 메뉴 출력
 
