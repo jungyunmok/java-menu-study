@@ -33,4 +33,45 @@ public class Coach {
         }
     }
 
+    // 못 먹는 음식 쉼표로 담기
+    public List<String> selectDislike(String dislike) {
+        List<String> dislikeMenu = new ArrayList<>();
+        if (dislike.length() > 1) {
+            String lastWord = String.valueOf(dislike.charAt(dislike.length() - 1));
+            if (dislike.contains(" ") || lastWord.equals(",")) {
+                System.out.println("[EROOR] 올바른 메뉴를 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
+                throw new IllegalArgumentException();
+            }
+            if (dislike.contains(",")) {
+                dislikeMenu = checkCount(dislike, dislikeMenu);
+                return dislikeMenu;
+            }
+            dislikeMenu.add(dislike);
+        }
+        return dislikeMenu;
+    }
+
+    // 메뉴 개수 확인
+    private List<String> checkCount(String dislike, List<String> dislikeMenu) {
+        String[] tempMenu = dislike.split(",");
+        if (tempMenu.length > 2) {
+            System.out.println("[EROOR] 올바른 메뉴를 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
+            throw new IllegalArgumentException();
+        }
+        for (String eachMenu : tempMenu) {
+            checkMenu(eachMenu);
+            dislikeMenu.add(eachMenu);
+        }
+        return dislikeMenu;
+    }
+
+    // 메뉴 유효성 검사
+    private void checkMenu(String eachMenu) {
+        for (Menu menu : Menu.values()) {
+            if(!menu.getMENULIST().contains(eachMenu)) {
+                System.out.println("[EROOR] 올바른 메뉴를 입력해주세요.");
+                throw new IllegalArgumentException();
+            }
+        }
+    }
 }
