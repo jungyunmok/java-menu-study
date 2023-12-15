@@ -39,7 +39,7 @@ public class Coach {
         if (dislike.length() > 1) {
             String lastWord = String.valueOf(dislike.charAt(dislike.length() - 1));
             if (dislike.contains(" ") || lastWord.equals(",")) {
-                System.out.println("[EROOR] 올바른 메뉴를 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
+                System.out.println("[EROOR] 메뉴는 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
                 throw new IllegalArgumentException();
             }
             if (dislike.contains(",")) {
@@ -55,7 +55,7 @@ public class Coach {
     private List<String> checkCount(String dislike, List<String> dislikeMenu) {
         String[] tempMenu = dislike.split(",");
         if (tempMenu.length > 2) {
-            System.out.println("[EROOR] 올바른 메뉴를 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
+            System.out.println("[EROOR] 메뉴는 공백없이 쉼표로 구분하여 최대 2개 입력해주세요.");
             throw new IllegalArgumentException();
         }
         for (String eachMenu : tempMenu) {
